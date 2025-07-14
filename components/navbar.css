@@ -1,0 +1,385 @@
+/* CSS Variables for Light and Dark Themes */
+:root {
+    --navbar-bg-light: rgb(229, 234, 243);
+    --navbar-bg-dark: rgb(31, 41, 55);
+    --text-color-light: black;
+    --text-color-dark: white;
+    --accent-color: #ff8c00;
+    --mobile-menu-bg-light: rgba(34, 34, 34, 0.9);
+    --mobile-menu-bg-dark: rgba(0, 0, 0, 0.95);
+    --theme-toggle-bg-light: rgba(255, 255, 255, 0.2);
+    --theme-toggle-bg-dark: rgba(0, 0, 0, 0.3);
+    --theme-toggle-hover-light: rgba(255, 255, 255, 0.3);
+    --theme-toggle-hover-dark: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Theme (Default) */
+[data-theme="light"] {
+    --navbar-bg: var(--navbar-bg-light);
+    --text-color: var(--text-color-light);
+    --mobile-menu-bg: var(--mobile-menu-bg-light);
+    --theme-toggle-bg: var(--theme-toggle-bg-light);
+    --theme-toggle-hover: var(--theme-toggle-hover-light);
+    --hamburger-color: #fff;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --navbar-bg: var(--navbar-bg-dark);
+    --text-color: var(--text-color-dark);
+    --mobile-menu-bg: var(--mobile-menu-bg-dark);
+    --theme-toggle-bg: var(--theme-toggle-bg-dark);
+    --theme-toggle-hover: var(--theme-toggle-hover-dark);
+    --hamburger-color: var(--text-color-dark);
+}
+
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.0rem 2rem;
+    background: var(--navbar-bg);
+    backdrop-filter: blur(10px);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Logo Styling */
+.navbar-logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-logo h1:hover {
+    color: var(--accent-color);
+}
+
+.navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 100px;
+    height: 80px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+/* Home Icon & Text (always visible) */
+.navbar-home-icon {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-home-icon:hover {
+    color: var(--accent-color);
+}
+
+.home-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Menu Links (collapsible on mobile) */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-menu a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--accent-color);
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar-menu a:hover {
+    color: var(--accent-color);
+}
+
+.navbar-menu a:hover::after {
+    width: 100%;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: var(--theme-toggle-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    margin: 0 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--theme-toggle-hover);
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-btn:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-toggle-icon {
+    transform: rotate(15deg);
+}
+
+/* Profile Icon */
+.navbar-profile-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background-color: var(--hamburger-color);
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: all 0.4s ease-in-out;
+}
+
+.menu-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 6px);
+    background-color: var(--accent-color);
+}
+
+.menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -6px);
+    background-color: var(--accent-color);
+}
+
+.menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Full-Screen Mobile Menu and Mobile Layout Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+        flex-wrap: nowrap;
+    }
+
+    .navbar-logo {
+        order: 0;
+    }
+
+    .navbar-home-icon {
+        display: flex;
+        order: 1;
+        margin-right: auto;
+        font-size: 0.9rem;
+    }
+
+    .home-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: var(--mobile-menu-bg);
+        backdrop-filter: blur(15px);
+        text-align: center;
+        padding-top: 5rem;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 0.4s ease-in-out;
+        z-index: 999;
+    }
+
+    .navbar-menu.open {
+        display: flex;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .navbar-menu a {
+        font-size: 1.5rem;
+        margin: 1.5rem 0;
+        color: var(--text-color);
+    }
+
+    .theme-toggle-btn {
+        order: 2;
+        width: 40px;
+        height: 40px;
+        margin: 0 0.25rem;
+    }
+
+    .navbar-profile-icon {
+        order: 3;
+        margin-left: 0.5rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        order: 4;
+        margin-left: 0.5rem;
+    }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .logo-image {
+        width: 80px;
+        height: 60px;
+    }
+
+    .theme-toggle-btn {
+        width: 35px;
+        height: 35px;
+        margin: 0 0.2rem;
+    }
+
+    .theme-toggle-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .profile-icon {
+        width: 35px;
+        height: 35px;
+    }
+
+    .menu-toggle span {
+        width: 25px;
+        height: 2px;
+    }
+}
+
+/* Smooth transitions for theme changes */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Accessibility improvements */
+.theme-toggle-btn:focus,
+.navbar-profile-icon:focus,
+.menu-toggle:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Animation for theme toggle */
+@keyframes themeTransition {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.theme-toggle-icon {
+    animation: themeTransition 0.3s ease;
+}
+
+/* Enhanced hover effects */
+.theme-toggle-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: -1;
+}
+
+.theme-toggle-btn:hover::before {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+}
